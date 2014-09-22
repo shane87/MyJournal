@@ -1,0 +1,11 @@
+MyJournal - (cl) Copyleft Eric Clothier (shane87) 2014
+
+This is a simple journaling app for Android. I started this project more to
+teach myself some Android app development.
+
+This project is currently in a buildable, runable state. The core functions,
+i.e. Database creation, query, and writing, and creating a new entry are 
+intact and working, at least minimally. On the other hand, there is still
+a LOT of work to do! For starters, I need to make the MainActivity update and
+show the newly created entry after return from the create entry activity. For
+full TO-DO's, see TO-DO.

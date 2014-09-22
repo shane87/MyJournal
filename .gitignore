@@ -1,0 +1,7 @@
+#Ignore files that are hidden
+.*
+#Except for .gitignore!
+!.gitignore
+
+#Ignore created binaries
+bin

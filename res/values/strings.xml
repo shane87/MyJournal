@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">My Journal</string>
+    <string name="action_settings">Settings</string>
+    <string name="newEntryButtonText">New Journal Entry</string>
+    <string name="editEntryActivity">Edit Entry</string>
+    <string name="editEntryActivityNew">New Entry</string>
+    <string name="entryTitleHint">Enter Title</string>
+    <string name="newEntryHint">Enter Text</string>
+    <string name="locationCheckBoxText">Record Location?</string>
+    <string name="saveEntryButtonText">Save Entry</string>
+    <string name="entryCreateErrorToast">Failed to create entry!!</string>
+    <string name="entryEmptyTitleError">Entry Must Have A Title!</string>
+    <string name="entryEmptyEntryError">Can\'t Save An Empty Entry!</string>
+
+</resources>

@@ -22,7 +22,7 @@ public class JournalAdapter extends BaseAdapter
 		inflater = LayoutInflater.from(appContext);
 	}
 	
-	static class JournalViewHolder
+	private static class JournalViewHolder
 	{
 		TextView titleView;
 		TextView dateView;

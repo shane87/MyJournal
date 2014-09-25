@@ -18,7 +18,7 @@ public class MainActivity extends ActionBarActivity {
 	public static final String ENTRY_ID = "com.shane87.MyJournal.ENTRY_ID";
 	//Journal object that abstracts all of the journal functions, including
 	//journal formatting and db access
-	public static Journal mJournal;
+	private static Journal mJournal;
 	private final static String TAG = "MyJournal.MainActivity";
 
     @Override
@@ -66,5 +66,10 @@ public class MainActivity extends ActionBarActivity {
     	intent.putExtra(ENTRY_ID, 0);
     	//Launch the intent
     	startActivity(intent);
+    }
+    
+    public static Journal getJournal()
+    {
+    	return mJournal;
     }
 }

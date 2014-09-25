@@ -18,7 +18,7 @@ public class JournalDbHelper extends SQLiteOpenHelper{
 	
 	public void onCreate(SQLiteDatabase db)
 	{
-		db.execSQL(JournalDb.SQL_CREATE_ENTRIES);
+		db.execSQL(JournalDb.getSqlCreateEntries());
 	}
 	
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion)

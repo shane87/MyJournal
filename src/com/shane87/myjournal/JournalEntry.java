@@ -2,11 +2,11 @@ package com.shane87.myjournal;
 
 public class JournalEntry {
 	
-	int eId;
-	String eTitle;
-	String eEntry;
-	String eDate;
-	String eTime;
+	private static int eId;
+	private static String eTitle;
+	private static String eEntry;
+	private static String eDate;
+	private static String eTime;
 	
 	JournalEntry(int id, String title, String entry, String date, String time)
 	{

@@ -108,7 +108,7 @@ public class EditEntryActivity extends ActionBarActivity {
 			//Get the current time
 			time.setToNow();
 			//Create a new entry using the Journal object from the main activity
-			MainActivity.mJournal.createNewEntry(
+			MainActivity.getJournal().createNewEntry(
 					//Title string from title text box
 					titleEditText.getText().toString(),
 					//Entry string

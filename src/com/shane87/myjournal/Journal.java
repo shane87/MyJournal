@@ -14,9 +14,9 @@ import android.widget.Toast;
 public class Journal{
 	
 	private final static String TAG = "MyJournal.Journal";
-	JournalDbHelper mDbHelper;
-	Context appContext;
-	ArrayList<JournalEntry> entries;
+	private JournalDbHelper mDbHelper;
+	private Context appContext;
+	private ArrayList<JournalEntry> entries;
 	
 	Journal(Context context)
 	{
@@ -38,13 +38,13 @@ public class Journal{
 		entries.add(0, new JournalEntry(newId, title, entry, date, time));
 		
 		ContentValues values = new ContentValues();
-		values.put(JournalDb.COLUMN_NAME_ENTRY_ID, newId);
-		values.put(JournalDb.COLUMN_NAME_TITLE, title);
-		values.put(JournalDb.COLUMN_NAME_ENTRY, entry);
-		values.put(JournalDb.COLUMN_NAME_DATE, date);
-		values.put(JournalDb.COLUMN_NAME_TIME, time);
+		values.put(JournalDb.getColumnNameEntryId(), newId);
+		values.put(JournalDb.getColumnNameTitle(), title);
+		values.put(JournalDb.getColumnNameEntry(), entry);
+		values.put(JournalDb.getColumnNameDate(), date);
+		values.put(JournalDb.getColumnNameTime(), time);
 		
-		long newRowId = db.insert(JournalDb.TABLE_NAME, null, values);
+		long newRowId = db.insert(JournalDb.getTableName(), null, values);
 		if (newRowId == -1)
 		{
 			entries.remove(0);
@@ -61,14 +61,14 @@ public class Journal{
 	private void getEntries()
 	{
 		Log.v(TAG, "Starting getEntries()!");
-		String[] projection = {JournalDb._ID, JournalDb.COLUMN_NAME_ENTRY_ID,
-				JournalDb.COLUMN_NAME_TITLE, JournalDb.COLUMN_NAME_ENTRY,
-				JournalDb.COLUMN_NAME_DATE, JournalDb.COLUMN_NAME_TIME};
+		String[] projection = {JournalDb.getColumnNameUniqueId(), JournalDb.getColumnNameEntryId(),
+				JournalDb.getColumnNameTitle(), JournalDb.getColumnNameEntry(),
+				JournalDb.getColumnNameDate(), JournalDb.getColumnNameTime()};
 		Log.v(TAG, "Projection defined!");
-		String sortorder = JournalDb.COLUMN_NAME_ENTRY_ID + " DESC";
+		String sortorder = JournalDb.getColumnNameEntryId() + " DESC";
 		Log.v(TAG, "Sort order defined!");
 		SQLiteDatabase db = mDbHelper.getReadableDatabase();
-		Cursor cursor = db.query(JournalDb.TABLE_NAME, projection, null, null, null, null, sortorder, "10");
+		Cursor cursor = db.query(JournalDb.getTableName(), projection, null, null, null, null, sortorder, "10");
 		Log.v(TAG, "DB queried!");
 		
 		if (cursor.getCount() == 0)
@@ -79,11 +79,11 @@ public class Journal{
 		
 		cursor.moveToFirst();
 		
-		int idIndex = cursor.getColumnIndex(JournalDb.COLUMN_NAME_ENTRY_ID);
-		int titleIndex = cursor.getColumnIndex(JournalDb.COLUMN_NAME_TITLE);
-		int entryIndex = cursor.getColumnIndex(JournalDb.COLUMN_NAME_ENTRY);
-		int dateIndex = cursor.getColumnIndex(JournalDb.COLUMN_NAME_DATE);
-		int timeIndex = cursor.getColumnIndex(JournalDb.COLUMN_NAME_TIME);
+		int idIndex = cursor.getColumnIndex(JournalDb.getColumnNameEntryId());
+		int titleIndex = cursor.getColumnIndex(JournalDb.getColumnNameTitle());
+		int entryIndex = cursor.getColumnIndex(JournalDb.getColumnNameEntry());
+		int dateIndex = cursor.getColumnIndex(JournalDb.getColumnNameDate());
+		int timeIndex = cursor.getColumnIndex(JournalDb.getColumnNameTime());
 		
 		for (int i = 0; i < 20; i++)
 		{
@@ -101,17 +101,17 @@ public class Journal{
 	
 	private int getNewId()
 	{
-		String[] projection = { JournalDb._ID, JournalDb.COLUMN_NAME_ENTRY_ID };
-		String sortorder = JournalDb.COLUMN_NAME_ENTRY_ID + " DESC";
+		String[] projection = { JournalDb.getColumnNameUniqueId(), JournalDb.getColumnNameEntryId() };
+		String sortorder = JournalDb.getColumnNameEntryId() + " DESC";
 		SQLiteDatabase db = mDbHelper.getWritableDatabase();
 		
-		Cursor cursor = db.query(JournalDb.TABLE_NAME, projection, null, null, null, null, sortorder, "10");
+		Cursor cursor = db.query(JournalDb.getTableName(), projection, null, null, null, null, sortorder, "10");
 		
 		if (cursor.getCount() == 0)
 			return 1;
 		
 		cursor.moveToFirst();
 		
-		return cursor.getInt(cursor.getColumnIndex(JournalDb.COLUMN_NAME_ENTRY_ID)) + 1;
+		return cursor.getInt(cursor.getColumnIndex(JournalDb.getColumnNameEntryId())) + 1;
 	}
 }

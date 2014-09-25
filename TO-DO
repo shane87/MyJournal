@@ -1,1 +1,10 @@
-Coming soon!!
+To-Do's for MyJournal
+
+    * Make entries list view update and show latest entry when returning from entry screen
+    * Make entries list view load older entries when scrolled down, if older entries exist
+    * Make entries list view selectable to allow for editing of old entries
+    * Adapt edit entries activity to allow for editing of old entries
+    * Adapt edit entries activity, or add new activity, to allow view only mode for old entries
+    * Adapt entries list view to allow user to choose between view or edit
+    * Adjust layouts/general UI cleanup
+    * Adjust entries list view to show entries in bigger text, improving visibility

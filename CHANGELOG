@@ -1,0 +1,6 @@
+Changelog for MyJournal
+
+Version 0.1:
+  Initial release
+  Basic functionality (DB creation, access, writing, etc)
+  Seperate activities for main list and entry cration

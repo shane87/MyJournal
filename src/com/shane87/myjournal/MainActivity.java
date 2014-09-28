@@ -15,11 +15,15 @@ public class MainActivity extends ActionBarActivity {
 	//String to specify the extras added to the intent that launches the
 	//entry editor. Carries the entry id for the entry we are editing, or
 	//0 for a new entry
-	public static final String ENTRY_ID = "com.shane87.MyJournal.ENTRY_ID";
+	private static final String ENTRY_ID = "com.shane87.MyJournal.ENTRY_ID";
+	private static final int EDIT_ENTRY_REQUEST = 0;
+	private static final int ENTRY_CREATED = 1;
 	//Journal object that abstracts all of the journal functions, including
 	//journal formatting and db access
 	private static Journal mJournal;
 	private final static String TAG = "MyJournal.MainActivity";
+	private static ListView mListView;
+	private static JournalAdapter mJournalAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,10 +35,11 @@ public class MainActivity extends ActionBarActivity {
         mJournal = new Journal(getApplicationContext());
         
         //Get a pointer to the main list view that will show existing entries
-        ListView mListView = (ListView) findViewById(R.id.entriesListView);
+        mListView = (ListView) findViewById(R.id.entriesListView);
         //Attach the journal adapter to the list view, passing the adapter the
         //current entries list from the main journal object
-        mListView.setAdapter(new JournalAdapter(getApplicationContext(), mJournal.getEntriesList()));
+        mJournalAdapter = new JournalAdapter(getApplicationContext(), mJournal.getEntriesList());
+        mListView.setAdapter(mJournalAdapter);
     }
 
 
@@ -57,6 +62,19 @@ public class MainActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
     
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data)
+    {
+    	if (requestCode == EDIT_ENTRY_REQUEST)
+    	{
+    		if (resultCode == ENTRY_CREATED)
+    		{
+    			mJournalAdapter = new JournalAdapter(getApplicationContext(), mJournal.getEntriesList());
+    			mListView.setAdapter(mJournalAdapter);
+    		}
+    	}
+    }
+    
     //Method to handle clicks on the new entry button
     public void newEntry(View view) 
     {
@@ -65,11 +83,21 @@ public class MainActivity extends ActionBarActivity {
     	//Put an extra on the intent to specify a new entry (id = 0)
     	intent.putExtra(ENTRY_ID, 0);
     	//Launch the intent
-    	startActivity(intent);
+    	startActivityForResult(intent, EDIT_ENTRY_REQUEST);
     }
     
     public static Journal getJournal()
     {
     	return mJournal;
+    }
+    
+    public static String getEntryIdIntentTag()
+    {
+    	return ENTRY_ID;
+    }
+    
+    public static int getEntryCreatedResult()
+    {
+    	return ENTRY_CREATED;
     }
 }

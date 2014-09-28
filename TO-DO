@@ -1,6 +1,8 @@
 To-Do's for MyJournal
 
-    * Make entries list view update and show latest entry when returning from entry screen
+    * (CRITICAL) Fix loading of entries. Entries read from db properly, but get stored into
+                 ArrayList<JournalEntry> improperly, causing all entries to show the same
+                 title and date on the main list view
     * Make entries list view load older entries when scrolled down, if older entries exist
     * Make entries list view selectable to allow for editing of old entries
     * Adapt edit entries activity to allow for editing of old entries

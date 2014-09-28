@@ -36,7 +36,7 @@ public class EditEntryActivity extends ActionBarActivity {
 		//Get the intent from the main activity, and pull the extra data
 		//passed from main activity; default to 0 if no extra
 		Intent intent = getIntent();
-		int id = intent.getIntExtra(MainActivity.ENTRY_ID, 0);
+		int id = intent.getIntExtra(MainActivity.getEntryIdIntentTag(), 0);
 		
 		//Check to see if we are working with a new id (id == 0)
 		if (id == 0)
@@ -118,6 +118,7 @@ public class EditEntryActivity extends ActionBarActivity {
 					//Get the time portion of the string returned by the time object
 					time.toString().substring(9));
 			
+			setResult(MainActivity.getEntryCreatedResult());
 			this.finish();
 		}
 	}
